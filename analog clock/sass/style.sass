@@ -1,0 +1,115 @@
+//declaring variable
+$watchSize: 360px
+$watchPadding: ($watchSize / 8.4)
+$watchBackground: #008B8B	
+$innerBorderWidth: ($watchSize / 72)
+$innerBorderColor: #181818
+$secondHandBackgroundColor: #00ff00
+
+
+
+html, body
+  height: 100%
+  
+body
+  display: flex      //works as center
+  align-items: center
+  justify-content: center
+  background: linear-gradient(110deg, #000000, #000000)
+  
+*
+  box-sizing: border-box !important
+
+//watch
+
+.watch
+  width: $watchSize
+  height: $watchSize
+  padding: $watchPadding
+  background-color: $watchBackground
+  border-bottom-left-radius: ($watchSize /3.5)    //curve bottom left
+  border-top-right-radius: ($watchSize / 3.5)      //curve top right
+ 
+  box-shadow: 0 18px 40px rgba(0,0,0,0.15)
+  
+  //inner
+  .inner
+    position: relative
+    width: 100%
+    height: 100%
+    background: #ffffff    
+    border: $innerBorderWidth solid $innerBorderColor    
+    box-shadow: 0 0 15px rgba(1,5,0,4.75) inset  
+    //hand
+    .hand
+      position: absolute
+      top: 50%
+      left: 50%
+      width: ($watchSize / 50)
+      background-color: #321414
+    
+      &.hour
+        height: ($watchSize / 5)
+        margin-top: -($watchSize / 13.2)
+        transform: rotate(0deg) translate(-50%, -50%)
+        transform-origin: 0 ($watchSize / 13.2)
+    
+      &.minute
+        height: ($watchSize / 3)
+        margin-top: -($watchSize / 13.2)
+        transform: rotate(0deg) translate(-50%, -50%)
+        transform-origin: 0 ($watchSize / 13.2)
+      
+      &.second
+        width: ($watchSize / 185)
+        height: ($watchSize / 3)
+        background-color: $secondHandBackgroundColor
+        margin-top: -($watchSize / 10)
+        box-shadow: -4px -6px 0 0 rgba(0, 0, 0, 0.15)
+        transform: rotate(0deg) translate(-50%, -50%)
+        transform-origin: 0 ($watchSize / 10)
+      
+        &:before, &:after
+          content: ''
+          display: inherit
+          position: inherit
+          left: inherit
+          background-color: inherit
+          border-radius: 50%
+          transform: translate(-50%, -50%)
+      
+        &:before
+          top: ($watchSize / 3.8)
+          width: ($watchSize / 20)
+          height: ($watchSize / 20)
+          box-shadow: -2px -2px 2px 0 rgba(0, 0, 0, 0.15)
+
+        &:after
+          top: ($watchSize / 18)
+          width: ($watchSize / 36)
+          height: ($watchSize / 36)
+          box-shadow: -4px -6px 2px 0 rgba(0, 0, 0, 0.15)
+      
+    .Indication
+      .hour
+        display: block
+        position: absolute
+        top: ($innerBorderWidth * 1.5)
+        left: 50%
+        width: ($watchSize / 185)
+        height: ($watchSize / 40)
+        background-color: #ff0000
+        transform: rotate(0deg) translateX(-50%)
+        transform-origin: 0 ((($watchSize - ($watchPadding * 2)) / 2) - ($innerBorderWidth * 3))
+        //&:nth-child(n)
+          width: 0
+          height: 0
+
+        &:nth-child(5n-4)
+          width: ($watchSize / 90)
+          height: ($watchSize / 18)
+
+        @for $i from 1 through 60   
+          &:nth-child(#{$i})
+            transform: rotate(#{( 6 * $i) - 5}deg) translateX(-50%)
+       
